@@ -2,7 +2,7 @@
 
 #include "kernel.h"
 
-#define unique_kernel TH_CONCAT_2(unique_kernel, Real)
+#define unique_kernel TH_CONCAT_2(unique_kernel_, Real)
 
 #include "generic/kernel.cu"
 #include "THCGenerateFloatType.h"

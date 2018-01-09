@@ -4,8 +4,7 @@
 
 #include <thrust/unique.h>
 
-THCTensor *unique_kernel(THCState *state, THCudaLongTensor *index, THCudaTensor *input) {
-  printf("in kernel");
+THCTensor *unique_kernel(THCState *state, THCudaLongTensor *index, THCTensor *input) {
   return NULL;
 }
 
