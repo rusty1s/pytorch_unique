@@ -2,9 +2,8 @@
 #define THC_GENERIC_FILE "generic/cuda.c"
 #else
 
-THCTensor *unique_(THCudaLongTensor *index, THCTensor *input) {
-  printf("drin");
-  return NULL;
+THCTensor *unique_cuda(THCudaLongTensor *index, THCTensor *input) {
+  return unique_kernel(state, index, input);
 }
 
 #endif

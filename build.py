@@ -1,3 +1,5 @@
+import subprocess
+
 import torch
 from torch.utils.ffi import create_extension
 
@@ -9,11 +11,13 @@ extra_objects = []
 with_cuda = False
 
 if torch.cuda.is_available():
+    subprocess.call('./build.sh')  # Compile kernel.
+
     headers += ['torch_unique/src/cuda.h']
     sources += ['torch_unique/src/cuda.c']
-    #include_dirs += ['torch_scatter/kernel']
+    include_dirs += ['torch_unique/kernel']
     define_macros += [('WITH_CUDA', None)]
-    #extra_objects += ['torch_scatter/build/kernel.so']
+    extra_objects += ['torch_unique/build/kernel.so']
     with_cuda = True
 
 ffi = create_extension(

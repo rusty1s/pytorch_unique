@@ -1,6 +1,9 @@
 #include <THC/THC.h>
 
-#define unique_ TH_CONCAT_2(unique_cuda_, Real)
+#include "kernel.h"
+
+#define unique_cuda TH_CONCAT_2(unique_cuda_, Real)
+#define unique_kernel TH_CONCAT_2(unique_kernel_, Real)
 
 extern THCState *state;
 
