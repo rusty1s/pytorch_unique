@@ -3,6 +3,8 @@
 #else
 
 THCTensor *unique_(THCudaLongTensor *index, THCTensor *input) {
+  printf("drin");
+  return NULL;
 }
 
 #endif

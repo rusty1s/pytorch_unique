@@ -1,6 +1,6 @@
 #include <THC/THC.h>
 
-#define unique_ TH_CONCAT_2(unique_, Real)
+#define unique_ TH_CONCAT_2(unique_cuda_, Real)
 
 extern THCState *state;
 

@@ -1,0 +1,31 @@
+import torch
+from torch.utils.ffi import create_extension
+
+headers = []
+sources = []
+include_dirs = ['torch_unique/src']
+define_macros = []
+extra_objects = []
+with_cuda = False
+
+if torch.cuda.is_available():
+    headers += ['torch_unique/src/cuda.h']
+    sources += ['torch_unique/src/cuda.c']
+    #include_dirs += ['torch_scatter/kernel']
+    define_macros += [('WITH_CUDA', None)]
+    #extra_objects += ['torch_scatter/build/kernel.so']
+    with_cuda = True
+
+ffi = create_extension(
+    name='torch_unique._ext.ffi',
+    package=True,
+    headers=headers,
+    sources=sources,
+    include_dirs=include_dirs,
+    define_macros=define_macros,
+    extra_objects=extra_objects,
+    with_cuda=with_cuda,
+    relative_to=__file__)
+
+if __name__ == '__main__':
+    ffi.build()
