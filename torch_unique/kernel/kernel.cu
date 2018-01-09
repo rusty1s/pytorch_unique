@@ -2,6 +2,8 @@
 
 #include "kernel.h"
 
+#include "THCThrustAllocator.cuh"
+
 #define unique_kernel TH_CONCAT_2(unique_kernel_, Real)
 
 #include "generic/kernel.cu"
