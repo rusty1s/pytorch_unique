@@ -1,28 +1,25 @@
 #include <cstddef>
 
-// Allocator for Thrust to re-route its internal device allocations
-// to the THC allocator.
 class THCThrustAllocator {
- public:
-  typedef char value_type;
+  public:
+    typedef char value_type;
 
-  THCThrustAllocator(THCState* state)
-      : state_(state) {
-  }
+    THCThrustAllocator(THCState* state) : state_(state) {
+    }
 
-  ~THCThrustAllocator() {
-  }
+    ~THCThrustAllocator() {
+    }
 
-  char* allocate(std::ptrdiff_t size) {
-    char* out = NULL;
-    THCudaCheck(THCudaMalloc(state_, (void**) &out, size));
-    return out;
-  }
+    char* allocate(std::ptrdiff_t size) {
+      char* out = NULL;
+      THCudaCheck(THCudaMalloc(state_, (void**) &out, size));
+      return out;
+    }
 
-  void deallocate(char* p, size_t size) {
-    THCudaCheck(THCudaFree(state_, p));
-  }
+    void deallocate(char* p, size_t size) {
+      THCudaCheck(THCudaFree(state_, p));
+    }
 
- private:
-  THCState* state_;
+  private:
+    THCState* state_;
 };
