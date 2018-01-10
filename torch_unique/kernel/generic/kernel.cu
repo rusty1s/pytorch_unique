@@ -3,8 +3,8 @@
 #else
 
 #include <thrust/device_ptr.h>
-#include <thrust/unique.h>
 #include <thrust/sort.h>
+#include <thrust/unique.h>
 
 THCTensor *unique_kernel(THCState *state, THCudaLongTensor *index, THCTensor *input) {
   input = THCTensor_(newContiguous)(state, input);
@@ -16,7 +16,6 @@ THCTensor *unique_kernel(THCState *state, THCudaLongTensor *index, THCTensor *in
   thrust::device_ptr<real> endIdxThrust(THRUST_EXEC(thrust::unique, idxThrust, idxThrust + numel));
   numel = endIdxThrust - idxThrust;
   THCTensor_(resize1d)(state, input, numel);
-
 
   THCTensor_(free)(state, input);
 

@@ -4,4 +4,4 @@ THCudaByteTensor*   unique_cuda_Byte  (THCudaLongTensor* index, THCudaByteTensor
 THCudaCharTensor*   unique_cuda_Char  (THCudaLongTensor* index, THCudaCharTensor*   input);
 THCudaShortTensor*  unique_cuda_Short (THCudaLongTensor* index, THCudaShortTensor*  input);
 THCudaIntTensor*    unique_cuda_Int   (THCudaLongTensor* index, THCudaIntTensor*    input);
-THCudaLongTensor*   unique_cuda_Long  (THCudaLongTensor* index, THCudaLongTensor*   input);
+THCudaLongTensor*   uniquee_cuda_Long  (THCudaLongTensor* index, THCudaLongTensor*   input);
