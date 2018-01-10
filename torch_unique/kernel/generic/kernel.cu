@@ -7,20 +7,20 @@
 #include <thrust/sort.h>
 
 THCTensor *unique_kernel(THCState *state, THCudaLongTensor *index, THCTensor *input) {
-  /* index = THCudaLongTensor_newContiguous(state, index); */
   input = THCTensor_(newContiguous)(state, input);
-  THCTensor *output = input;
 
-  thrust::device_ptr<real> output_data(THCTensor_(data)(state, input));
-  ptrdiff_t size = THCTensor_(nElement)(state, output);
-
+  thrust::device_ptr<real> idxThrust(THCTensor_(data)(state, input));
+  ptrdiff_t numel = THCTensor_(nElement)(state, input);
   THRUST_ALLOC(state);
-  THRUST_EXEC(thrust::sort, output_data, output_data + size);
+  THRUST_EXEC(thrust::sort, idxThrust, idxThrust + numel);
+  thrust::device_ptr<real> endIdxThrust(THRUST_EXEC(thrust::unique, idxThrust, idxThrust + numel));
+  numel = endIdxThrust - idxThrust;
+  THCTensor_(resize1d)(state, input, numel);
+
 
   THCTensor_(free)(state, input);
 
-  return NULL;
-  /* return output; */
+  return input;
 }
 
 #endif
