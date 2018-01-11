@@ -6,20 +6,36 @@
 #include <thrust/sort.h>
 #include <thrust/unique.h>
 
-THCTensor *unique_kernel(THCState *state, THCudaLongTensor *index, THCTensor *input) {
+void unique_(single)(THCState *state, THCTensor *input) {
   input = THCTensor_(newContiguous)(state, input);
 
-  thrust::device_ptr<real> idxThrust(THCTensor_(data)(state, input));
+  thrust::device_ptr<real> first(THCTensor_(data)(state, input));
   ptrdiff_t numel = THCTensor_(nElement)(state, input);
   THRUST_ALLOC(state);
-  THRUST_EXEC(thrust::sort, idxThrust, idxThrust + numel);
-  thrust::device_ptr<real> endIdxThrust(THRUST_EXEC(thrust::unique, idxThrust, idxThrust + numel));
-  numel = endIdxThrust - idxThrust;
+  THRUST_EXEC(thrust::sort, first, first + numel);
+  thrust::device_ptr<real> last(THRUST_EXEC(thrust::unique, first, first + numel));
+  numel = last - first;
   THCTensor_(resize1d)(state, input, numel);
 
   THCTensor_(free)(state, input);
+}
 
-  return input;
+void unique_(byKey)(single)(THCState *state, THCTensor *key, THCTensor *value) {
+  key = THCTensor_(newContiguous)(state, key);
+  value = THCTensor_(newContiguous)(state, value);
+
+  thrust::device_ptr<real> firstKey(THCTensor_(data)(state, key));
+  thrust::device_ptr<real> firstValue(THCTensor_(data)(state, value));
+  ptrdiff_t numel = THCTensor_(nElement)(state, key);
+  THRUST_ALLOC(state);
+  THRUST_EXEC(thrust::sort_by_key, firstKey, firstKey + numel, firstValue);
+  thrust::device_ptr<real> last(THRUST_EXEC(thrust::unique_by_key, firstKey, firstKey + numel, firstValue));
+  numel = last - first;
+  THCTensor_(resize1d)(state, key, numel);
+  THCTensor_(resize1d)(state, value, numel);
+
+  THCTensor_(free)(state, key);
+  THCTensor_(free)(state, value);
 }
 
 #endif

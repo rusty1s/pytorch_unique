@@ -2,13 +2,21 @@
 extern "C" {
 #endif
 
-THCudaTensor*       unique_kernel_Float (THCState *state, THCudaLongTensor* index, THCudaTensor*       input);
-THCudaDoubleTensor* unique_kernel_Double(THCState *state, THCudaLongTensor* index, THCudaDoubleTensor* input);
-THCudaByteTensor*   unique_kernel_Byte  (THCState *state, THCudaLongTensor* index, THCudaByteTensor*   input);
-THCudaCharTensor*   unique_kernel_Char  (THCState *state, THCudaLongTensor* index, THCudaCharTensor*   input);
-THCudaShortTensor*  unique_kernel_Short (THCState *state, THCudaLongTensor* index, THCudaShortTensor*  input);
-THCudaIntTensor*    unique_kernel_Int   (THCState *state, THCudaLongTensor* index, THCudaIntTensor*    input);
-THCudaLongTensor*   unique_kernel_Long  (THCState *state, THCudaLongTensor* index, THCudaLongTensor*   input);
+void unique_single_kernel_Float (THCState *state, THCudaTensor*       input);
+void unique_single_kernel_Double(THCState *state, THCudaDoubleTensor* input);
+void unique_single_kernel_Byte  (THCState *state, THCudaByteTensor*   input);
+void unique_single_kernel_Char  (THCState *state, THCudaCharTensor*   input);
+void unique_single_kernel_Short (THCState *state, THCudaShortTensor*  input);
+void unique_single_kernel_Int   (THCState *state, THCudaIntTensor*    input);
+void unique_single_kernel_Long  (THCState *state, THCudaLongTensor*   input);
+
+void unique_byKey_kernel_Float (THCState *state, THCudaTensor*       key, THCudaTensor*       value);
+void unique_byKey_kernel_Double(THCState *state, THCudaDoubleTensor* key, THCudaDoubleTensor* value);
+void unique_byKey_kernel_Byte  (THCState *state, THCudaByteTensor*   key, THCudaByteTensor*   value);
+void unique_byKey_kernel_Char  (THCState *state, THCudaCharTensor*   key, THCudaCharTensor*   value);
+void unique_byKey_kernel_Short (THCState *state, THCudaShortTensor*  key, THCudaShortTensor*  value);
+void unique_byKey_kernel_Int   (THCState *state, THCudaIntTensor*    key, THCudaIntTensor*    value);
+void unique_byKey_kernel_Long  (THCState *state, THCudaLongTensor*   key, THCudaLongTensor*   value);
 
 #ifdef __cplusplus
 }
