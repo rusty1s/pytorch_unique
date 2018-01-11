@@ -23,6 +23,8 @@ void unique_(single)(THCState *state, THCTensor *input) {
 }
 
 void unique_(byKey)(THCState *state, THCTensor *key, THCTensor *value) {
+  THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, key, value));
+
   key = THCTensor_(newContiguous)(state, key);
   value = THCTensor_(newContiguous)(state, value);
 
