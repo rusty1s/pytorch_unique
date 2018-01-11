@@ -5,15 +5,11 @@ from .._ext import ffi
 
 def unique(input):
     if input.is_cuda:
-        output, sort_index = input.sort(dim=0)
-
+        output = input.new(input.size()).copy_(input)
         typename = type(input).__name__.replace('Tensor', '')
-        func = getattr(ffi, 'unique_cuda_{}'.format(typename))
-        unique_index = torch.cuda.LongTensor(input.size())
-        func(index, output)
-
-        index = input.new(input.size()).long()
-        return output, index
+        func = getattr(ffi, 'unique_single_cuda_{}'.format(typename))
+        func(output)
+        return output
     else:
         output, unique_index = np.unique(input.numpy(), return_inverse=True)
         return torch.from_numpy(output), torch.from_numpy(unique_index)
