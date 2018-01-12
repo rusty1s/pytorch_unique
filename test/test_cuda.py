@@ -6,16 +6,17 @@ import time
 
 # f
 
-key = torch.cuda.LongTensor([1, 1, 1, 1, 1000, 1, 1000, 100])
-value = torch.cuda.LongTensor([1, 2, 2, 1, 3, 1, 1000, 100])
-# input = torch.arange(0, 100000000).cuda()
+input = torch.arange(0, 100000000)
 
 t = time.process_time()
-key, value = unique_by_key(key, value)
+input = unique(input)
 t = time.process_time() - t 
 print(t)
-print(key)
-print(value)
+input = input.cuda()
+t = time.process_time()
+input = unique(input)
+t = time.process_time() - t 
+print(t)
 # ffi.unique_single_cuda_Long(input)
 # print(input)
 
