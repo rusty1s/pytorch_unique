@@ -6,7 +6,7 @@
 #include <thrust/sort.h>
 #include <thrust/unique.h>
 
-void unique_(single)(THCState *state, THCTensor *input) {
+void unique_()(THCState *state, THCTensor *input) {
   input = THCTensor_(newContiguous)(state, input);
 
   thrust::device_ptr<real> first(THCTensor_(data)(state, input));
@@ -22,7 +22,7 @@ void unique_(single)(THCState *state, THCTensor *input) {
   THCTensor_(free)(state, input);
 }
 
-void unique_(byKey)(THCState *state, THCTensor *key, THCTensor *value) {
+void unique_(ByKey)(THCState *state, THCTensor *key, THCTensor *value) {
   THCAssertSameGPU(THCTensor_(checkGPU)(state, 2, key, value));
 
   key = THCTensor_(newContiguous)(state, key);
@@ -34,7 +34,6 @@ void unique_(byKey)(THCState *state, THCTensor *key, THCTensor *value) {
 
   THRUST_ALLOC(state);
   THRUST_EXEC(thrust::sort_by_key, firstKey, firstKey + numel, firstValue);
-
   thrust::pair<thrust::device_ptr<real>, thrust::device_ptr<real> > last(THRUST_EXEC(thrust::unique_by_key, firstKey, firstKey + numel, firstValue));
 
   THCTensor_(resize1d)(state, key, last.first - firstKey);

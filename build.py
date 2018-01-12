@@ -11,7 +11,7 @@ extra_objects = []
 with_cuda = False
 
 if torch.cuda.is_available():
-    # subprocess.call('./build.sh')  # Compile kernel.
+    subprocess.call('./build.sh')  # Compile kernel.
 
     headers += ['torch_unique/src/cuda.h']
     sources += ['torch_unique/src/cuda.c']

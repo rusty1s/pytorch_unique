@@ -9,11 +9,13 @@ def unique(input):
     if input.is_cuda:
         output = input.new(input.size()).copy_(input)
         typename = type(input).__name__.replace('Tensor', '')
-        func = getattr(ffi, 'unique_single_cuda_{}'.format(typename))
+        func = getattr(ffi, 'unique_cuda_{}'.format(typename))
         func(output)
         return output
     else:
-        return torch.from_numpy(np.unique(input.numpy()))
+        input = input.numpy()
+        input = np.unique(input)
+        return torch.from_numpy(input)
 
 
 def unique_by_key(key, value):
@@ -23,14 +25,15 @@ def unique_by_key(key, value):
     assert key.numel() == value.numel(), ('Key tensor must have same size as '
                                           'value tensor')
 
-    if input.is_cuda:
+    if key.is_cuda:
         key = key.new(key.size()).copy_(key)
         value = value.new(value.size()).copy_(value)
-        typename = type(input).__name__.replace('Tensor', '')
-        func = getattr(ffi, 'unique_byKey_cuda_{}'.format(typename))
+        typename = type(key).__name__.replace('Tensor', '')
+        func = getattr(ffi, 'uniqueByKey_cuda_{}'.format(typename))
         func(key, value)
         return key, value
     else:
-        return None, None
-
-
+        key, value = key.numpy(), value.numpy()
+        key, index = np.unique(key, return_index=True)
+        value = value[index]
+        return torch.from_numpy(key), torch.from_numpy(value)

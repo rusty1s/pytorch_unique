@@ -2,12 +2,12 @@
 #define THC_GENERIC_FILE "generic/cuda.c"
 #else
 
-void unique_(single)(THCTensor *input) {
-  return unique_kernel_(single)(state, input);
+void unique_()(THCTensor *input) {
+  return unique_kernel_()(state, input);
 }
 
-void unique_(byKey)(THCTensor *key, THCTensor *value) {
-  return unique_kernel_(byKey)(state, key, value);
+void unique_(ByKey)(THCTensor *key, THCTensor *value) {
+  return unique_kernel_(ByKey)(state, key, value);
 }
 
 #endif

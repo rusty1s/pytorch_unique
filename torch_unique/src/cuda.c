@@ -2,8 +2,8 @@
 
 #include "kernel.h"
 
-#define unique_(NAME) TH_CONCAT_4(unique_, NAME, _cuda_, Real)
-#define unique_kernel_(NAME) TH_CONCAT_4(unique_, NAME, _kernel_, Real)
+#define unique_(NAME) TH_CONCAT_4(unique, NAME, _cuda_, Real)
+#define unique_kernel_(NAME) TH_CONCAT_4(unique, NAME, _kernel_, Real)
 
 extern THCState *state;
 

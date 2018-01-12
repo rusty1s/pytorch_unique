@@ -8,7 +8,7 @@
 #include <thrust/system/cuda/execution_policy.h>
 #endif
 
-#define unique_(NAME) TH_CONCAT_4(unique_, NAME, _kernel_, Real)
+#define unique_(NAME) TH_CONCAT_4(unique, NAME, _kernel_, Real)
 
 #if CUDA_VERSION >= 7000
 #define THRUST_ALLOC(state) THCThrustAllocator thrustAlloc(state)
