@@ -15,7 +15,7 @@ def unique(input):
 
     assert input.dim() == 1, 'Input tensor must be 1-dimensional'
 
-    if input.is_cuda:
+    if input.is_cuda:  # pragma: no cover
         output = input.new(input.size()).copy_(input)
         typename = type(input).__name__.replace('Tensor', '')
         func = getattr(ffi, 'unique_cuda_{}'.format(typename))

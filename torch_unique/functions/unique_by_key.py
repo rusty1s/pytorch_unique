@@ -23,7 +23,7 @@ def unique_by_key(key, value):
     assert key.numel() == value.numel(), ('Key tensor must have same size as '
                                           'value tensor')
 
-    if key.is_cuda:
+    if key.is_cuda:  # pragma: no cover
         key = key.new(key.size()).copy_(key)
         value = value.new(value.size()).copy_(value)
         typename = type(key).__name__.replace('Tensor', '')
