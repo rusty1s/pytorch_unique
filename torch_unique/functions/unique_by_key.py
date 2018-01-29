@@ -5,6 +5,17 @@ from .._ext import ffi
 
 
 def unique_by_key(key, value):
+    """Returns the sorted unique elements of the one-dimensional tensor
+    :attr:`key` as first return value. In addition, :attr:`value` is filtered
+    by the unique indices of :attr:`key`.
+
+    Args:
+        key (Tensor): The key source tensor
+        value (Tensor): The value source tensor
+
+    :rtype: (:class:`Tensor`, :class:`Tensor`)
+    """
+
     assert key.dim() == 1, 'Key tensor must be 1-dimensional'
     assert key.dim() == value.dim(), (
         'Key tensor must have same dimensions as '

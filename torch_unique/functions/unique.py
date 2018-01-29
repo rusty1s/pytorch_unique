@@ -5,6 +5,14 @@ from .._ext import ffi
 
 
 def unique(input):
+    """Returns the sorted unique elements of an one-dimensional tensor.
+
+    Args:
+        input (Tensor): The source tensor
+
+    :rtype: :class:`Tensor`
+    """
+
     assert input.dim() == 1, 'Input tensor must be 1-dimensional'
 
     if input.is_cuda:
