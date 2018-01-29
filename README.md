@@ -75,6 +75,6 @@ print(output_value)
 
 ## Running tests
 
-```
+```sh
 python setup.py test
 ```
