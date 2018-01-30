@@ -2,10 +2,6 @@
 #define THC_GENERIC_FILE "generic/kernel.cu"
 #else
 
-#include <thrust/device_ptr.h>
-#include <thrust/sort.h>
-#include <thrust/unique.h>
-
 void unique_()(THCState *state, THCTensor *input) {
   input = THCTensor_(newContiguous)(state, input);
 
@@ -13,8 +9,8 @@ void unique_()(THCState *state, THCTensor *input) {
   ptrdiff_t numel = THCTensor_(nElement)(state, input);
 
   THRUST_ALLOC(state);
-  THRUST_EXEC(thrust::sort, first, first + numel);
-  thrust::device_ptr<real> last(THRUST_EXEC(thrust::unique, first, first + numel));
+  THRUST_EXEC(thrust::sort, first, first + numel, ThrustLTOp<real>());
+  thrust::device_ptr<real> last(THRUST_EXEC(thrust::unique, first, first + numel, ThrustEQOp<real>()));
 
   numel = last - first;
   THCTensor_(resize1d)(state, input, numel);
@@ -33,8 +29,8 @@ void unique_(ByKey)(THCState *state, THCTensor *key, THCTensor *value) {
   ptrdiff_t numel = THCTensor_(nElement)(state, key);
 
   THRUST_ALLOC(state);
-  THRUST_EXEC(thrust::sort_by_key, firstKey, firstKey + numel, firstValue);
-  thrust::pair<thrust::device_ptr<real>, thrust::device_ptr<real> > last(THRUST_EXEC(thrust::unique_by_key, firstKey, firstKey + numel, firstValue));
+  THRUST_EXEC(thrust::sort_by_key, firstKey, firstKey + numel, firstValue, ThrustLTOp<real>());
+  thrust::pair<thrust::device_ptr<real>, thrust::device_ptr<real> > last(THRUST_EXEC(thrust::unique_by_key, firstKey, firstKey + numel, firstValue, ThrustEQOp<real>()));
 
   THCTensor_(resize1d)(state, key, last.first - firstKey);
   THCTensor_(resize1d)(state, value, last.second - firstValue);

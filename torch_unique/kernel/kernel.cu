@@ -1,8 +1,12 @@
 #include <THC.h>
+#include <thrust/device_ptr.h>
+#include <thrust/sort.h>
+#include <thrust/unique.h>
 
 #include "kernel.h"
 
 #include "THCThrustAllocator.cuh"
+#include "THCNumerics.cuh"
 
 #if CUDA_VERSION >= 7000
 #include <thrust/system/cuda/execution_policy.h>
@@ -19,16 +23,4 @@
 #endif
 
 #include "generic/kernel.cu"
-#include "THCGenerateFloatType.h"
-#include "generic/kernel.cu"
-#include "THCGenerateDoubleType.h"
-#include "generic/kernel.cu"
-#include "THCGenerateByteType.h"
-#include "generic/kernel.cu"
-#include "THCGenerateCharType.h"
-#include "generic/kernel.cu"
-#include "THCGenerateShortType.h"
-#include "generic/kernel.cu"
-#include "THCGenerateIntType.h"
-#include "generic/kernel.cu"
-#include "THCGenerateLongType.h"
+#include "THCGenerateAllTypes.h"
