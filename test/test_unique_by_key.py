@@ -1,6 +1,6 @@
 import pytest
 import torch
-import torch_unique
+from torch_unique import unique_by_key
 
 from .utils import tensors, Tensor
 
@@ -12,7 +12,7 @@ def test_unique_by_key_cpu(tensor):
     expected_key = Tensor(tensor, [1, 10, 100, 1000])
     expected_value = Tensor(tensor, [4, 2, 1, 5])
 
-    output_key, output_value = torch_unique.unique_by_key(key, value)
+    output_key, output_value = unique_by_key(key, value)
     assert output_key.tolist() == expected_key.tolist()
     assert output_value.tolist() == expected_value.tolist()
 
@@ -25,6 +25,6 @@ def test_unique_by_key_gpu(tensor):  # pragma: no cover
     expected_key = Tensor(tensor, [1, 10, 100, 1000])
     expected_value = Tensor(tensor, [4, 2, 1, 5])
 
-    output_key, output_value = torch_unique.unique_by_key(key, value)
+    output_key, output_value = unique_by_key(key, value)
     assert output_key.cpu().tolist() == expected_key.tolist()
     assert output_value.cpu().tolist() == expected_value.tolist()
