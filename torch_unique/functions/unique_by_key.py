@@ -17,9 +17,8 @@ def unique_by_key(key, value):
     """
 
     assert key.dim() == 1, 'Key tensor must be 1-dimensional'
-    assert key.dim() == value.dim(), (
-        'Key tensor must have same dimensions as '
-        'value tensor')
+    assert key.dim() == value.dim(), ('Key tensor must have same dimensions '
+                                      'as value tensor')
     assert key.numel() == value.numel(), ('Key tensor must have same size as '
                                           'value tensor')
 
