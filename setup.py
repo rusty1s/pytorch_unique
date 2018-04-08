@@ -12,7 +12,7 @@ tests_require = ['pytest', 'pytest-cov']
 setup(
     name='torch_unique',
     version=__version__,
-    description='PyTorch Extension Library of Optimised Unique Operations',
+    description='PyTorch Extension Library of Optimized Unique Operations',
     author='Matthias Fey',
     author_email='matthias.fey@tu-dortmund.de',
     url=url,

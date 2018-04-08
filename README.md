@@ -13,7 +13,7 @@
 
 --------------------------------------------------------------------------------
 
-This package consists of a small extension library of highly optimised unique operations for the use in [PyTorch](http://pytorch.org/), which are missing in the main package.
+This package consists of a small extension library of highly optimized unique operations for the use in [PyTorch](http://pytorch.org/), which are missing in the main package.
 The package consists of the following operations:
 
 * **[Unique](#unique)**
