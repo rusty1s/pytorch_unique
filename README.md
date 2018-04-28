@@ -27,7 +27,7 @@ Check that `nvcc` is accessible from terminal, e.g. `nvcc --version`.
 If not, add cuda (`/usr/local/cuda/bin`) to your `$PATH`.
 Then run:
 
-```sh
+```
 pip install cffi torch-unique
 ```
 
@@ -72,6 +72,6 @@ tensor([ 4,  2,  1,  5])
 
 ## Running tests
 
-```sh
+```
 python setup.py test
 ```
