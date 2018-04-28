@@ -1,11 +1,15 @@
 import torch
-from torch._tensor_docs import tensor_classes
+from torch.testing import get_all_dtypes
 
-tensors = [t[:-4] for t in tensor_classes]
-tensors.remove('ByteTensor')  # TODO: Byte conversion not working
-tensors.remove('CharTensor')  # TODO: Char conversion not working
+dtypes = get_all_dtypes()
+dtypes.remove(torch.half)
+dtypes.remove(torch.uint8)  # TODO: byte conversion not working.
+dtypes.remove(torch.int8)  # TODO: char conversion not working.
+
+devices = [torch.device('cpu')]
+if torch.cuda.is_available():  # pragma: no cover
+    devices += [torch.device('cuda:{}'.format(torch.cuda.current_device()))]
 
 
-def Tensor(str, x):
-    tensor = getattr(torch, str)
-    return tensor(x)
+def tensor(x, dtype, device):
+    return None if x is None else torch.tensor(x, dtype=dtype, device=device)
