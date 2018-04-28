@@ -1,7 +1,7 @@
 from .._ext import ffi
 
 
-def get_func(name, tensor):
+def get_func(name, tensor):  # pragma: no cover
     name += '_'
     name += 'cuda_' if tensor.is_cuda else ''
     name += tensor.type().split('.')[-1][:-6]
