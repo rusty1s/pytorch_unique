@@ -39,14 +39,13 @@ Returns the sorted unique elements of an one-dimensional tensor.
 import torch
 from torch_unique import unique
 
-input = torch.Tensor([100, 10, 100, 1, 1000, 1, 1000, 1])
-output = unique(input)
+src = torch.tensor([100, 10, 100, 1, 1000, 1, 1000, 1])
+out = unique(src)
 ```
 
 ```
-print(output)
- 1  10  100  1000
-[torch.FloatTensor of size 4]
+print(out)
+tensor([ 1,  10,  100,  1000])
 ```
 
 ## Unique by Key
@@ -58,19 +57,17 @@ In addition, `value` is filtered by the unique indices of `key`.
 import torch
 from torch_unique import unique_by_key
 
-key = torch.Tensor([100, 10, 100, 1, 1000, 1, 1000, 1])
-value = torch.Tensor([1, 2, 3, 4, 5, 6, 7, 8])
-output_key, output_value = unique_by_key(key, value)
+key = torch.tensor([100, 10, 100, 1, 1000, 1, 1000, 1])
+value = torch.tensor([1, 2, 3, 4, 5, 6, 7, 8])
+key_out, value_out = unique_by_key(key, value)
 ```
 
 ```
-print(output_key)
- 1  10  100  1000
-[torch.FloatTensor of size 4]
+print(key_out)
+tensor([ 1,  10,  100,  1000])
 
-print(output_value)
- 4  2  1  5
-[torch.FloatTensor of size 4]
+print(value_out)
+tensor([ 4,  2,  1,  5])
 ```
 
 ## Running tests
