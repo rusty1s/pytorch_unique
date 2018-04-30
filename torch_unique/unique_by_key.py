@@ -18,7 +18,7 @@ def unique_by_key(key, value):
 
     if key.is_cuda:  # pragma: no cover
         key, value = key.clone(), value.clone()
-        get_func('uniqueByKey')(key, value)
+        get_func('uniqueByKey', key)(key, value)
         return key, value
     else:
         key, index = np.unique(key, return_index=True)

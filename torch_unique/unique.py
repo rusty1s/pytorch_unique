@@ -15,7 +15,7 @@ def unique(src):
 
     if src.is_cuda:  # pragma: no cover
         out = src.clone()
-        get_func('unique')(out)
+        get_func('unique', out)(out)
         return out
     else:
         return torch.from_numpy(np.unique(src))
