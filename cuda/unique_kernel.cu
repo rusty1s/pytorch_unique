@@ -1,11 +1,10 @@
-#include <Aten/ATen.h>
+#include <ATen/ATen.h>
 
 #define THREADS 1024
 #define BLOCKS(N) (N + THREADS - 1) / THREADS
 
 template <typename scalar_t>
-__global__ void unique_cuda_kernel(scalar_t *__restrict__ src, uint8_t *mask,
-                                   size_t numel) {
+__global__ void unique_cuda_kernel(scalar_t *src, uint8_t *mask, size_t numel) {
   const size_t index = blockIdx.x * blockDim.x + threadIdx.x;
   const size_t stride = blockDim.x * gridDim.x;
   for (ptrdiff_t i = index; i < numel; i += stride) {
