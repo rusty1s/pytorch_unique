@@ -38,8 +38,8 @@ A tuple of `(unique_tensor, unique_indices)` is returned, where the `unique_indi
 
 ### Returns
 
-* **out** *(Tensor)* - The unique elements from `src` as one-dimensional tensor.
-* **perm** *(LongTensor)* - The unique indices from `src` as one-dimensional tensor.
+* **out** *(Tensor)* - The unique elements from `src` as an one-dimensional tensor.
+* **perm** *(LongTensor)* - The unique indices from `src` as an one-dimensional tensor.
 
 ### Example
 
