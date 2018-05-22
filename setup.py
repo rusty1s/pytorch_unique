@@ -2,7 +2,7 @@ import torch
 from setuptools import setup, find_packages
 from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 url = 'https://github.com/rusty1s/pytorch_unique'
 
 install_requires = ['numpy']
