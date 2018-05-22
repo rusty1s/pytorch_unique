@@ -25,7 +25,7 @@ pip install torch-unique
 ## Usage
 
 ```
-torch_unique.unique</b>(src) -> (Tensor, LongTensor)
+torch_unique.unique(src) -> (Tensor, LongTensor)
 ```
 
 Returns the sorted unique scalar elements of the input tensor as an one-dimensional tensor.
