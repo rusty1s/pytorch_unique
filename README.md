@@ -13,61 +13,49 @@
 
 --------------------------------------------------------------------------------
 
-This package consists of a small extension library of highly optimized unique operations for the use in [PyTorch](http://pytorch.org/), which are missing in the main package.
-The package consists of the following operations:
-
-* **[Unique](#unique)**
-* **[Unique by Key](#unique-by-key)**
-
-All included operations work on varying data types and are implemented both for CPU and GPU.
+This package consists of a small extension library of a highly optimized `unique` operation for the use in [PyTorch](http://pytorch.org/), which is missing in the main package.
+The operation works on varying data types and is implemented both for CPU and GPU.
 
 ## Installation
 
-Check that `nvcc` is accessible from terminal, e.g. `nvcc --version`.
-If not, add cuda (`/usr/local/cuda/bin`) to your `$PATH`.
-Then run:
-
 ```
-pip install cffi torch-unique
+pip install torch-unique
 ```
 
-## Unique
+## Usage
 
-Returns the sorted unique elements of an one-dimensional tensor.
+```
+torch_unique.unique</b>(src) -> (Tensor, LongTensor)
+```
+
+Returns the sorted unique scalar elements of the input tensor as an one-dimensional tensor.
+
+A tuple of `(unique_tensor, unique_indices)` is returned, where the `unique_indices` are the indices of the elements in the original input tensor. Note that `unique_indices` is not guaranteed to be stable on GPU.
+
+### Parameters
+
+* **src** *(Tensor)* - The input tensor.
+
+### Returns
+
+* **out** *(Tensor)* - The unique elements from `src` as one-dimensional tensor.
+* **perm** *(LongTensor)* - The unique indices from `src` as one-dimensional tensor.
+
+### Example
 
 ```py
 import torch
 from torch_unique import unique
 
 src = torch.tensor([100, 10, 100, 1, 1000, 1, 1000, 1])
-out = unique(src)
+out, perm = unique(src)
 ```
 
 ```
 print(out)
-tensor([ 1,  10,  100,  1000])
-```
-
-## Unique by Key
-
-Returns the sorted unique elements of the one-dimensional tensor `key` as first return value.
-In addition, `value` is filtered by the unique indices of `key`.
-
-```py
-import torch
-from torch_unique import unique_by_key
-
-key = torch.tensor([100, 10, 100, 1, 1000, 1, 1000, 1])
-value = torch.tensor([1, 2, 3, 4, 5, 6, 7, 8])
-key_out, value_out = unique_by_key(key, value)
-```
-
-```
-print(key_out)
-tensor([ 1,  10,  100,  1000])
-
-print(value_out)
-tensor([ 4,  2,  1,  5])
+tensor([    1,    10,   100,  1000])
+print(perm)
+tensor([ 3,  1,  0,  4])
 ```
 
 ## Running tests

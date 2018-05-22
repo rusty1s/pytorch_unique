@@ -1,0 +1,5 @@
+[report]
+exclude_lines =
+    pragma: no cover
+    torch.cuda.is_available()
+    is_cuda

@@ -1,13 +1,22 @@
-from os import path as osp
-
+import torch
 from setuptools import setup, find_packages
+from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 
-__version__ = '0.3.1'
+__version__ = '1.0.0'
 url = 'https://github.com/rusty1s/pytorch_unique'
 
-install_requires = ['cffi']
-setup_requires = ['pytest-runner', 'cffi']
+install_requires = ['numpy']
+setup_requires = ['pytest-runner']
 tests_require = ['pytest', 'pytest-cov']
+ext_modules = []
+cmdclass = {}
+
+if torch.cuda.is_available():
+    ext_modules += [
+        CUDAExtension('unique_cuda',
+                      ['cuda/unique.cpp', 'cuda/unique_kernel.cu'])
+    ]
+    cmdclass['build_ext'] = BuildExtension
 
 setup(
     name='torch_unique',
@@ -21,7 +30,7 @@ setup(
     install_requires=install_requires,
     setup_requires=setup_requires,
     tests_require=tests_require,
-    packages=find_packages(exclude=['build']),
-    ext_package='',
-    cffi_modules=[osp.join(osp.dirname(__file__), 'build.py:ffi')],
+    ext_modules=ext_modules,
+    cmdclass=cmdclass,
+    packages=find_packages(),
 )
