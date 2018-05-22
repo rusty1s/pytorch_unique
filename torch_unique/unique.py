@@ -1,6 +1,8 @@
 import torch
 import numpy as np
-import unique_cuda
+
+if torch.cuda.is_available():
+    import unique_cuda
 
 
 def unique(src):
