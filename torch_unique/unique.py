@@ -20,6 +20,8 @@ def unique(src):
     :rtype: (:class:`Tensor`, :class:`LongTensor`)
     """
 
+    src = src.contiguous().view(-1)
+
     if src.is_cuda:
         out, perm = unique_cuda.unique(src)
     else:

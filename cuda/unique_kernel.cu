@@ -16,7 +16,6 @@ __global__ void unique_cuda_kernel(scalar_t *__restrict__ src, uint8_t *mask,
 }
 
 std::tuple<at::Tensor, at::Tensor> unique_cuda(at::Tensor src) {
-  src = src.contiguous().view({-1});
   at::Tensor perm;
   std::tie(src, perm) = src.sort();
 
