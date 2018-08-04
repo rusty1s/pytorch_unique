@@ -15,7 +15,8 @@
 
 **PyTorch 0.4.1 now supports [`unique`](https://pytorch.org/docs/stable/torch.html#torch.unique) both for CPU and GPU.
 Therefore, this package is no longer needed and will not be updated.
-PyTorch's version does not return an index array, but you can easily generate it by using the following code:**
+In contrast to this package, PyTorch's version does not return an index array.
+However, you can easily generate it by using the following code:**
 
 ```python
 import torch
