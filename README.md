@@ -13,6 +13,20 @@
 
 --------------------------------------------------------------------------------
 
+**PyTorch 0.4.1 now supports [`unique`](https://pytorch.org/docs/stable/torch.html#torch.unique) both for CPU and GPU.
+Therefore, this package is no longer needed and will not be updated.
+PyTorch's version does not return an index array, but you can easily generate it by using the following code:**
+
+```python
+import torch
+
+unique, inverse = torch.unique(x, sorted=True, return_inverse=True)
+perm = torch.arange(inverse.size(0), dtype=inverse.dtype, device=inverse.device)
+perm = inverse.new_empty(inverse.max().item() + 1).scatter_(0, inverse, perm)
+```
+
+--------------------------------------------------------------------------------
+
 This package consists of a small extension library of a highly optimized `unique` operation for the use in [PyTorch](http://pytorch.org/), which is missing in the main package.
 The operation works on varying data types and is implemented both for CPU and GPU.
 
