@@ -1,6 +1,6 @@
 #include <torch/torch.h>
 
-#define CHECK_CUDA(x) AT_ASSERT(x.type().is_cuda(), #x " must be a CUDA tensor")
+#define CHECK_CUDA(x) AT_ASSERTM(x.type().is_cuda(), #x " must be CUDA tensor")
 
 std::tuple<at::Tensor, at::Tensor> unique_cuda(at::Tensor src);
 
