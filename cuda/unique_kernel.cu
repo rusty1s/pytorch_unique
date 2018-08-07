@@ -19,7 +19,7 @@ std::tuple<at::Tensor, at::Tensor> unique_cuda(at::Tensor src) {
   at::Tensor perm;
   std::tie(src, perm) = src.sort();
 
-  auto mask = at::zeros(src.numel(), src.type().toScalarType(at::kByte));
+  auto mask = at::zeros(src.type().toScalarType(at::kByte), {src.numel()});
   AT_DISPATCH_ALL_TYPES(src.type(), "grid_cuda_kernel", [&] {
     unique_cuda_kernel<scalar_t><<<BLOCKS(src.numel()), THREADS>>>(
         src.data<scalar_t>(), mask.data<uint8_t>(), src.numel());
