@@ -33,9 +33,26 @@ The operation works on varying data types and is implemented both for CPU and GP
 
 ## Installation
 
+Ensure that PyTorch 0.4.0 is installed and verify that `cuda/bin` and `cuda/install` are in your `$PATH` and `$CPATH` respectively, *e.g.*:
+
 ```
-pip install torch-unique
+$ python -c "import torch; print(torch.__version__)"
+>>> 0.4.0
+
+$ echo $PATH
+>>> /usr/local/cuda/bin:...
+
+$ echo $CPATH
+>>> /usr/local/cuda/install:...
 ```
+
+Then run:
+
+```
+pip install torch-scatter torch-unique
+```
+
+If you are running into any installation problems, please create an [issue](https://github.com/rusty1s/pytorch_unique/issues).
 
 ## Usage
 

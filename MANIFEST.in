@@ -1,3 +1,2 @@
 include LICENSE
-include cuda/unique.cpp
-include cuda/unique_kernel.cu
+recursive-include cuda *

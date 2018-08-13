@@ -1,5 +1,5 @@
-import torch
 from setuptools import setup, find_packages
+import torch
 from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 
 __version__ = '1.0.2'
