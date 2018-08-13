@@ -15,7 +15,7 @@ def unique(src):
     GPU.
 
     Args:
-        src (Tensor): The input tensor.
+        src (:class:`Tensor`): The input tensor.
 
     :rtype: (:class:`Tensor`, :class:`LongTensor`)
     """
