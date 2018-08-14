@@ -33,7 +33,7 @@ The operation works on varying data types and is implemented both for CPU and GP
 
 ## Installation
 
-Ensure that PyTorch 0.4.0 is installed and verify that `cuda/bin` and `cuda/install` are in your `$PATH` and `$CPATH` respectively, *e.g.*:
+Ensure that PyTorch 0.4.0 is installed and verify that `cuda/bin` and `cuda/include` are in your `$PATH` and `$CPATH` respectively, *e.g.*:
 
 ```
 $ python -c "import torch; print(torch.__version__)"
@@ -43,7 +43,7 @@ $ echo $PATH
 >>> /usr/local/cuda/bin:...
 
 $ echo $CPATH
->>> /usr/local/cuda/install:...
+>>> /usr/local/cuda/include:...
 ```
 
 Then run:
