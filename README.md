@@ -49,7 +49,7 @@ $ echo $CPATH
 Then run:
 
 ```
-pip install torch-scatter torch-unique
+pip install torch-unique
 ```
 
 If you are running into any installation problems, please create an [issue](https://github.com/rusty1s/pytorch_unique/issues).
