@@ -1,8 +1,7 @@
 from setuptools import setup, find_packages
-import torch
-from torch.utils.cpp_extension import BuildExtension, CUDAExtension
+from torch.utils.cpp_extension import BuildExtension, CUDAExtension, CUDA_HOME
 
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 url = 'https://github.com/rusty1s/pytorch_unique'
 
 install_requires = ['numpy']
@@ -11,9 +10,9 @@ tests_require = ['pytest', 'pytest-cov']
 ext_modules = []
 cmdclass = {}
 
-if torch.cuda.is_available():
+if CUDA_HOME:
     ext_modules += [
-        CUDAExtension('unique_cuda',
+        CUDAExtension('torch_unique.unique_cuda',
                       ['cuda/unique.cpp', 'cuda/unique_kernel.cu'])
     ]
     cmdclass['build_ext'] = BuildExtension
@@ -32,5 +31,4 @@ setup(
     tests_require=tests_require,
     ext_modules=ext_modules,
     cmdclass=cmdclass,
-    packages=find_packages(),
-)
+    packages=find_packages(), )
